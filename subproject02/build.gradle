@@ -1,0 +1,26 @@
+plugins {
+    id 'java'
+}
+
+group 'com.atguigu'
+version '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
+}
+
+test {
+    useJUnitPlatform()
+}
+
+task B{
+    dependsOn(":subproject01:A") //依赖根工程下的subject01中的任务A ：跨项目依赖。
+    doLast {
+        println "TaskB.."
+    }
+}

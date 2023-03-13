@@ -1,0 +1,113 @@
+plugins {
+    id 'java'
+}
+
+group 'com.atguigu'
+version '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
+}
+
+test {
+    useJUnitPlatform()
+}
+
+/*
+def map = new HashMap<String,Object>();
+map.put("action", { println("task...") })
+
+task(map,"task1") {
+    // 任务的配置段，这配置阶段执行
+    print "这是最简单的任务"
+    // 任务的行为，在执行阶段执行，doFirst会在doLast执行之前执行
+    doFirst {
+        println("task1 do first")
+    }
+
+    doLast {
+        println("taks1 do last")
+    }
+}
+
+
+task1.doFirst {
+    println "task1 doFirst outer"
+}
+
+task1.doLast {
+    println "task1 doLast outer"
+}*/
+
+
+
+// 任务直接的依赖关系设置
+// 方式一：参数方式依赖
+/*task A {
+    doLast {
+        println "TaskA.." }
+}
+task 'B'{
+    doLast {
+        println "TaskB.." }
+}
+//参数方式依赖: dependsOn后面用冒号
+task 'C'(dependsOn: ['A','B']){
+    doLast {
+        println "TaskC.." }
+}*/
+
+
+//方式二:内部依赖
+//参数方式依赖
+/*
+task A {
+    doLast {
+        println "TaskA.."
+    }
+}
+task 'B' {
+    doLast {
+        println "TaskB.."
+    }
+}
+
+task 'C' {
+//内部依赖：dependsOn后面用 = 号
+    dependsOn = [A, B]
+    doLast {
+        println "TaskC.."
+    }
+}
+*/
+
+
+// 方式三：外部依赖
+/*task A {
+    doLast {
+        println "TaskA.."
+    }
+}
+task 'B' {
+    doLast {
+        println "TaskB.."
+    }
+}
+
+task 'C'{
+
+}
+
+//外部依赖:可变参数,引号可加可不加
+C.dependsOn(B,'A')*/
+
+// 方式四跨项目依赖
+// 在 subproject01 工程的 build.gradle 文件中定义 task A
+// 在 subproject02 工程的 build.gradle 文件中定义 task B dependsOn(":subproject01:A") //依赖根工程下的subject01中的任务A ：跨项目依赖。
+
+
