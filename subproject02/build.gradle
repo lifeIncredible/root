@@ -19,6 +19,12 @@ test {
 }
 
 task B{
+    // 为任务指定分组，此时gradle tasks 命令将显示
+    // 守护组 tasks
+    //---------
+    // A
+    // B
+    group('守护组')
     dependsOn(":subproject01:A") //依赖根工程下的subject01中的任务A ：跨项目依赖。
     doLast {
         println "TaskB.."

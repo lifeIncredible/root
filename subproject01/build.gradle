@@ -19,6 +19,12 @@ test {
 }
 
 task 'A' {
+    // 为任务指定分组，此时gradle tasks 命令将显示
+    // 守护组 tasks
+    //---------
+    // A
+    // B
+    group('守护组')
     doLast {
         println "TaskA.."
     }
