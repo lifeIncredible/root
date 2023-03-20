@@ -21,6 +21,7 @@ test {
     useJUnitPlatform()
 }
 
+// =============================TASK 任务操作=======================================
 /*
 def map = new HashMap<String,Object>();
 map.put("action", { println("task...") })
@@ -286,3 +287,49 @@ tasks.register('other') {
         println "I'm not a default task!"
     }
 }
+
+// ===========================================文件操作====================================================
+// 1、本地文件
+// 使用 Project.file(java.lang.Object)方法，
+// 通过指定文件的相对路径或绝对路径来对文件的操作,其中相对路径为相对当前project[根 project 或者子 project]的目录。
+// 其实使用 Project.file(java.lang.Object)方法创建的 File 对象就是 Java 中的 File 对象，我们可以使用它就像在 Java 中使用一样。
+
+// 使用相对路径
+/*
+File configFile = file("src/conf.xml")
+configFile.createNewFile();
+
+// 使用绝对路径
+configFile = file("D:\\conf.xml")
+println(configFile.createNewFile())
+
+// 使用一个文件对象
+configFile = new File("src/atguigu.xml")
+println(configFile.exists())
+*/
+
+
+// 2、文件集合
+/*def fileCollection = files('src/text1.xml', 'src/text2.xml', 'src/text3.xml', ['src/text4.xml', 'src/text5.xml'])
+fileCollection.forEach {item ->{
+    print(item.name)
+    item.createNewFile()
+}}
+
+// 把文件集合转换为java中的Set类型
+//Set set1 = collection.files
+Set set2 = fileCollection as Set
+
+// 把文件集合转换为java中的List类型
+List list = fileCollection as List
+for (item in list) {
+    println item.name
+}
+
+//添加或者删除一个集合
+def union = fileCollection + files('src/test6.txt')
+def minus = fileCollection - files('src/test3.txt')
+union.forEach(){
+    File it -> println it.name
+}*/
+
