@@ -18,6 +18,7 @@ test {
     useJUnitPlatform()
 }
 
+/*
 task B{
     // 为任务指定分组，此时gradle tasks 命令将显示
     // 守护组 tasks
@@ -29,4 +30,4 @@ task B{
     doLast {
         println "TaskB.."
     }
-}
+}*/
