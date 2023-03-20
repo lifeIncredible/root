@@ -190,3 +190,52 @@ class CustomerTask extends DefaultTask{
     }
 }
 
+
+
+// 5、任务的动态分配
+4.times { counter ->
+    tasks.register("task$counter") {
+        group("atguigu")
+        doLast {
+            println "I'm task number $counter"
+        }
+    }
+}
+
+// 6、任务的关闭与开启
+// 每个任务都有一个 enabled 默认为的标志 true。将其设置为 false 阻止执行任何任务动作。禁用的任务将标记为“跳过”。
+task2.enabled(false)
+tasks.named('task0'){
+    dependsOn('task2','task3')
+}
+
+// 7、任务的超时
+// 在控制台使用: gradle a b 测试会发现执行 a 的时候,由于 a 执行超时，抛出异常，所以没有继续往下执行【b 也没执行】。
+// 然后在控制台使用: gradle a b –continue,测试会发现 a 虽然执行失败，但是 b 还是执行了。
+task a() {
+    doLast {
+        Thread.sleep(1000)
+        println "当前任务a执行了"
+    }
+    timeout = Duration.ofMillis(500)
+}
+
+task b() {
+    doLast {
+        println "当前任务b执行了"
+    }
+}
+
+// 8、任务的查找
+// 常规的任务查找方法有
+task atguigu {
+    doLast {
+        println "让天下没有难学的技术：尚硅谷"
+    }
+}
+//根据任务名查找
+tasks.findByName("atguigu").doFirst({println "尚硅谷校区1：北京...."})
+tasks.getByName("atguigu").doFirst({println "尚硅谷校区2：深圳...."})
+// 根据任务路径查找【相对路径】
+tasks.findByPath(":atguigu").doFirst({println "尚硅谷校区3：上海...."})
+tasks.getByPath(":atguigu").doFirst({println "尚硅谷校区4：武汉...."})
