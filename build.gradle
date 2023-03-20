@@ -239,3 +239,50 @@ tasks.getByName("atguigu").doFirst({println "尚硅谷校区2：深圳...."})
 // 根据任务路径查找【相对路径】
 tasks.findByPath(":atguigu").doFirst({println "尚硅谷校区3：上海...."})
 tasks.getByPath(":atguigu").doFirst({println "尚硅谷校区4：武汉...."})
+
+
+// 9、任务的规则
+// 当我们执行、依赖一个不存在的任务时，Gradle 会执行失败,报错误信息。
+// 那我们能否对其进行改进,当执行一个不存在的任务时，不是报错而是打印提示信息呢？
+task hello {
+    doLast {
+        println("hello 尚硅谷的粉丝们")
+    }
+}
+tasks.addRule("尚硅谷的粉丝们") {
+    String taskName -> task(taskName) {
+        println("$taskName 任务不存在")
+    }
+}
+
+// 10、任务的Only断言
+// 断言就是一个条件表达式。Task 有一个 onlyIf 方法。
+// 它接受一个闭包作为参数，如果该闭包返回 true 则该任务执行，否则跳过。
+// 这有很多用途，比如控制程序哪些情况下打什么包，什么时候执行单元测试，什么情况下执行单元测试的时候不执行网络测试等。
+task hi {
+    doLast {
+        println '你好，尚硅谷的粉丝们'
+    }
+}
+hi.onlyIf {
+    !project.hasProperty('fensi')
+}
+
+// 10、默认任务
+// Gradle 允许您定义一个或多个在没有指定其他任务时执行的默认任务。
+defaultTasks 'myDelete', 'myRun'
+tasks.register('myDelete'){
+    doLast {
+        println 'Default Cleaning!'
+    }
+}
+tasks.register('myRun') {
+    doLast {
+        println 'Default Running!'
+    }
+}
+tasks.register('other') {
+    doLast {
+        println "I'm not a default task!"
+    }
+}
