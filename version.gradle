@@ -1,0 +1,5 @@
+ext {
+    company= "尚硅谷"
+    cfgs = [compileSdkVersion : JavaVersion.VERSION_1_8]
+    spring = [version : '5.0.0']
+}
