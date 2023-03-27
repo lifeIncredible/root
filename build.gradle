@@ -35,6 +35,27 @@ repositories {
     google()
 }
 
+// ext 配置的是用户自定义属性，而 gradle.properties 中一般定义 系统属性、环境变量、项目属性、JVM 相关配置
+// 自定义一个Project的属性
+ext.age = 18
+// 通过代码块同时自定义多个属性
+ext {
+    phone = 19292883833
+    address="北京尚硅谷"
+}
+task extCustomProperty {
+// 在task中自定义属性
+    ext {
+        desc = "奥利给"
+    }
+    doLast {
+        println "年龄是：${age}"
+        println "电话是：${phone}"
+        println "地址是：${address}"
+        println "尚硅谷：${desc}"
+    }
+}
+
 // allprojects 与subprojects 属性使用
 /*allprojects {
     tasks.create("hello"){
