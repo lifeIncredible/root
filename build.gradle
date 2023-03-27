@@ -22,6 +22,25 @@ repositories {
     mavenCentral()
 }
 
+// 设置项目原级
+/*sourceSets {
+    main {
+        // java 代码的目录
+        java {
+            srcDirs = ['src/atguigu/java']
+        }
+        // 配置文件的目录
+        resources {
+            srcDirs = ['src/atguigu/resources']
+        }
+        // 配置文件在项目构建后存放的目录
+        output.resourcesDir = file('out/bin')
+        // java代码在项目构建后存放的目录
+        java.destinationDirectory.set(file('out/bin'))
+    }
+}*/
+
+
 // =====================第一类，脚本插件========================
 //apply from:'version.gradle'
 //tasks.register('taskVersion') {
