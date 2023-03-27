@@ -18,6 +18,8 @@ test {
     useJUnitPlatform()
 }
 
+apply plugin: 'com.atguigu.plugin'
+
 /*
 task 'A' {
     // 为任务指定分组，此时gradle tasks 命令将显示
