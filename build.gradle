@@ -240,6 +240,15 @@ configurations.configureEach() {
         configuration.resolutionStrategy.failOnVersionConflict()
 }
 
+task A {
+    println "root taskA"
+    doFirst() {
+        println "root taskA doFirst"
+    }
+    doLast() {
+        println "root taskA doLast"
+    }
+}
 
 
 // =============================TASK 任务操作=======================================

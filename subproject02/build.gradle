@@ -31,3 +31,26 @@ task B{
         println "TaskB.."
     }
 }*/
+
+//task C在上面
+task C{
+//依赖task D
+    dependsOn 'D'
+    println "SubProject02 taskC"
+    doFirst(){
+        println "SubProject02 taskC doFirst"
+    }
+    doLast(){
+        println "SubProject02 taskC doLast"
+    }
+}
+//task D在下面
+task D {
+    println "SubProject02 taskD"
+    doFirst(){
+        println "SubProject02 taskD doFirst"
+    }
+    doLast(){
+        println "SubProject02 taskD doLast"
+    }
+}
